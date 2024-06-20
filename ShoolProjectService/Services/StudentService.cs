@@ -1,5 +1,6 @@
 ﻿using SchoolProjectData.Entities;
 using SchoolProjectInfrastrcure.Abstract;
+using SchoolProjectInfrastrcure.Data;
 using ShoolProjectService.Abstract;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace ShoolProjectService.Services
     public class StudentService : IStudentService
     {
         private readonly IStudentRepository _studentRepository;
-public StudentService(IStudentRepository studentRepository)
+        public StudentService(IStudentRepository studentRepository)
         {
             _studentRepository = studentRepository;
         }
@@ -30,5 +31,11 @@ public StudentService(IStudentRepository studentRepository)
             return await _studentRepository.AddStudentASync(student);
 
         }
+        public async Task<bool> IsNameExit(string name)
+        {
+            return await _studentRepository.IsNameExit( name);
+        }
     }
+
 }
+

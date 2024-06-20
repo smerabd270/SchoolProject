@@ -4,16 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SchoolProjectCore.Features.Students.Command.Models;
+using ShoolProjectService.Abstract;
 
 namespace SchoolProjectCore.Features.Students.Command.Validations
 {
     public class AddStudentValidation : AbstractValidator<AddStudentCommand>
     {
-        public AddStudentValidation()
-        {
+        private readonly IStudentService _studentService;
 
+        public AddStudentValidation(IStudentService studentService)
+        {
+            _studentService = studentService;
+            ApplyValidationRule();
+            ApplyCustomValidationRule();
         }
+
+        
         public void ApplyValidationRule()
         {
             RuleFor(x => x.Name)
@@ -26,6 +34,11 @@ namespace SchoolProjectCore.Features.Students.Command.Validations
                .MaximumLength(30).WithMessage("Address max length is 30");
 
 
+        }
+        public void ApplyCustomValidationRule()
+        {
+            RuleFor(x => x.Name)
+                .MustAsync(async (Key, CancellationToken) => !await _studentService.IsNameExit(Key)).WithMessage("Name Exit");
         }
     }
 }

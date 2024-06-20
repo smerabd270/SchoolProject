@@ -12,5 +12,6 @@ namespace ShoolProjectService.Abstract
         Task<List<Student>> GetStudentsListAsync();
         Task<Student> GetStudentByIdAsync(int Id);
         Task<string> AddStudentASync(Student student);
+        Task<bool> IsNameExit(string name);
     }
 }

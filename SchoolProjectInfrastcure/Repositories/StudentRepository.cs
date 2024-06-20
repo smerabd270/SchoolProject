@@ -44,5 +44,9 @@ namespace SchoolProjectInfrastrcure.Repositories
 
 
         }
+        public async Task<bool>IsNameExit(string name)
+        {
+            return await _applicationDbContext.students.AnyAsync(x => x.Name == name);
+        }
     }
 }
