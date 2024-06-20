@@ -35,6 +35,14 @@ namespace ShoolProjectService.Services
         {
             return await _studentRepository.IsNameExit( name);
         }
+        public async Task<string> UpdateStudentAsync(Student student)
+        {
+          return await  _studentRepository.UpdateStudentAsync(student);
+        }
+        public async Task<string> DeleteStudentAsync(int Id )
+        {
+            return await _studentRepository.DeleteStudentAsync(Id);
+        }
     }
 
 }

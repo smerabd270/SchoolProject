@@ -13,5 +13,7 @@ namespace SchoolProjectInfrastrcure.Abstract
         Task<Student> GetStudentByIdAsync(int id);
         Task<string> AddStudentASync(Student student);
         Task<bool> IsNameExit(string name);
+        Task<string> UpdateStudentAsync(Student student);
+         Task<string> DeleteStudentAsync(int Id);
     }
 }

@@ -48,5 +48,34 @@ namespace SchoolProjectInfrastrcure.Repositories
         {
             return await _applicationDbContext.students.AnyAsync(x => x.Name == name);
         }
+        public async Task<string> UpdateStudentAsync(Student student)
+        {
+            try
+            {
+                _applicationDbContext.students.Update(student);
+                await _applicationDbContext.SaveChangesAsync();
+                return ("Sccuess");
+            }
+            catch (Exception ex)
+            {
+                return (ex.Message);
+            }
+             
+        }
+        public async Task<string> DeleteStudentAsync(int Id)
+        {
+            try
+            {
+              var student= await  _applicationDbContext.students.Where(x=>x.StuID== Id).FirstAsync();
+                 _applicationDbContext.students.Remove(student);
+                await _applicationDbContext.SaveChangesAsync();
+                return ("Sccuess");
+            }
+            catch (Exception ex)
+            {
+                return (ex.Message);
+            }
+
+        }
     }
 }

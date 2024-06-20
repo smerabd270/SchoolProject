@@ -20,7 +20,12 @@ namespace SchoolProjectCore.Mapping.Students
             .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(dest => dest.Departments.DName));
             CreateMap<Student, AddStudentCommand>()
                 .ForMember(dest => dest.DepartmentId, opt => opt.MapFrom(dest => dest.DID))
-            .ReverseMap();  
+            .ReverseMap();
+            CreateMap<Student, UpdateStudentCommand>()
+                .ForMember(dest => dest.DepartmentId, opt => opt.MapFrom(dest => dest.DID))
+                 .ForMember(dest => dest.Id, opt => opt.MapFrom(dest => dest.StuID))
+
+            .ReverseMap();
 
 
         }

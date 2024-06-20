@@ -13,7 +13,11 @@ using ShoolProjectService.Abstract;
 namespace SchoolProjectCore.Features.Students.Command.Hnadlers
 {
     public class StudentCommandHandler
-                                        : ResponseHandler, IRequestHandler<AddStudentCommand, Response<string>>
+                                        : ResponseHandler, IRequestHandler<AddStudentCommand, Response<string>>,
+                                                           IRequestHandler<UpdateStudentCommand, Response<string>>,
+                                                           IRequestHandler<DeleteStudentCommand, Response<string>>
+
+
     {
         private readonly IStudentService _studentService;
         private readonly IMapper _mapper;
@@ -30,6 +34,22 @@ namespace SchoolProjectCore.Features.Students.Command.Hnadlers
             if (result == "success")
                 return SuccessMessage<string>(null);
             return BadRequest<string>(null);
+        }
+
+        public async  Task<Response<string>> Handle(UpdateStudentCommand request, CancellationToken cancellationToken)
+        {
+            var mappedEntity = _mapper.Map<Student>(request);
+            var result= await _studentService.UpdateStudentAsync(mappedEntity);
+        
+                return SuccessMessage<string>(result);
+           
+        }
+
+        public async  Task<Response<string>> Handle(DeleteStudentCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _studentService.DeleteStudentAsync(request.Id);
+
+            return SuccessMessage<string>(result);
         }
     }
 }
