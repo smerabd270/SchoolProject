@@ -18,6 +18,7 @@ namespace SchoolProjectData.AppMetaData
             public const string List = Prefix + "List";
             public const string Add = Prefix + "Add";
             public const string Update = Prefix + "Update";
+            public const string Delete = Prefix + "Delete";
 
 
             public const string GetById = Prefix + "/{id}";
