@@ -15,5 +15,6 @@ namespace SchoolProjectInfrastrcure.Abstract
         Task<bool> IsNameExit(string name);
         Task<string> UpdateStudentAsync(Student student);
          Task<string> DeleteStudentAsync(int Id);
+        IQueryable<Student> GetAllStudentsQueryable();
     }
 }

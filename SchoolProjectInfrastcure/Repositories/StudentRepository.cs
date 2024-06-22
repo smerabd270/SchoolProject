@@ -77,5 +77,9 @@ namespace SchoolProjectInfrastrcure.Repositories
             }
 
         }
+        public IQueryable<Student> GetAllStudentsQueryable()
+        {
+            return _applicationDbContext.students.Include (x=>x.Departments).AsQueryable();
+        }
     }
 }

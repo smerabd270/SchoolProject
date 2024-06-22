@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -44,9 +45,13 @@ namespace SchoolProjectCore.Queries.Handlers
 
         }
 
-        public Task<PaginatedResult<GetStudentPaginatedListResponse>> Handle(GetStudentPaginatedListQuery request, CancellationToken cancellationToken)
+        public async Task<PaginatedResult<GetStudentPaginatedListResponse>> Handle(GetStudentPaginatedListQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            Expression<Func<Student, GetStudentPaginatedListResponse>> expression =
+                          e => new GetStudentPaginatedListResponse(e.StuID, e.Name, e.Address, e.Departments.DName);
+            var querable = _studentService.GetAllStudentsQueryable( request.OrderBy,request.Search);
+            var paginatedList = await querable.Select(expression).ToPaginatedListAsync(request.PageNumber, request.PageSize);
+            return paginatedList;
         }
     }
 }

@@ -33,15 +33,22 @@ namespace ShoolProjectService.Services
         }
         public async Task<bool> IsNameExit(string name)
         {
-            return await _studentRepository.IsNameExit( name);
+            return await _studentRepository.IsNameExit(name);
         }
         public async Task<string> UpdateStudentAsync(Student student)
         {
-          return await  _studentRepository.UpdateStudentAsync(student);
+            return await _studentRepository.UpdateStudentAsync(student);
         }
-        public async Task<string> DeleteStudentAsync(int Id )
+        public async Task<string> DeleteStudentAsync(int Id)
         {
             return await _studentRepository.DeleteStudentAsync(Id);
+        }
+        public IQueryable<Student> GetAllStudentsQueryable(string[] order, string serach)
+        {
+            var students = _studentRepository.GetAllStudentsQueryable();
+            if (!string.IsNullOrEmpty(serach))
+                students = students.Where(x => x.Name.Contains(serach) || x.Address.Contains(serach));
+            return students;
         }
     }
 
