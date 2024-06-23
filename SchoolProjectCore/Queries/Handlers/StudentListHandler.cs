@@ -6,9 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Localization;
 using SchoolProjectCore.Base;
 using SchoolProjectCore.Queries.Models;
 using SchoolProjectCore.Queries.Response;
+using SchoolProjectCore.Resources;
 using SchoolProjectCore.Warppers;
 using SchoolProjectData.Entities;
 using ShoolProjectService.Abstract;
@@ -21,11 +23,13 @@ namespace SchoolProjectCore.Queries.Handlers
     {
         private readonly IStudentService _studentService;
         private readonly IMapper _mapper;
+        private readonly IStringLocalizer<SharedResources>  _stringLocalizer;
 
-        public StudentListHandler(IStudentService studentService, IMapper mapper)
+        public StudentListHandler(IStudentService studentService, IMapper mapper, IStringLocalizer<SharedResources> stringLocalizer)
         {
             _studentService = studentService;
             _mapper = mapper;
+            _stringLocalizer = stringLocalizer;
         }
 
         public async Task<Response<List<GetStudentListResponse>>> Handle(GetStudentListQuery request, CancellationToken cancellationToken)
@@ -39,7 +43,7 @@ namespace SchoolProjectCore.Queries.Handlers
         {
             var entity = await _studentService.GetStudentByIdAsync(request.Id);
             if (entity == null)
-                return NotFound<GetStudentSingleResponse>();
+                return NotFound<GetStudentSingleResponse>(_stringLocalizer[SharedResourcesKeys.NotFound]);
             var result = _mapper.Map<GetStudentSingleResponse>(entity);
             return Success(result);
 
