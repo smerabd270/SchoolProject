@@ -10,6 +10,12 @@ namespace SchoolProjectCore.Resources
     {
         public const string Required = "Required";
         public const string NotFound = "NotFound";
+        public const string DeletedDone = "DeletedDone";
+        public const string Success = "Success";
+        public const string Unauthorized = "Unauthorized";
+
+        public const string BadRequest = "BadRequest";
+
 
     }
 }
