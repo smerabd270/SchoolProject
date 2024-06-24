@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Localization;
 using SchoolProjectCore.Base;
 using SchoolProjectCore.Features.Students.Command.Models;
+using SchoolProjectCore.Resources;
 using SchoolProjectData.Entities;
 using ShoolProjectService.Abstract;
 
@@ -21,11 +23,12 @@ namespace SchoolProjectCore.Features.Students.Command.Hnadlers
     {
         private readonly IStudentService _studentService;
         private readonly IMapper _mapper;
-
-        public StudentCommandHandler(IStudentService studentService, IMapper mapper)
+        private readonly IStringLocalizer<SharedResources> _stringLocalizer;
+        public StudentCommandHandler(IStudentService studentService, IMapper mapper, IStringLocalizer<SharedResources> stringLocalizer):base(stringLocalizer)
         {
             _studentService = studentService;
             _mapper = mapper;
+            _stringLocalizer = stringLocalizer;
         }
         public async Task<Response<string>> Handle(AddStudentCommand request, CancellationToken cancellationToken)
         {

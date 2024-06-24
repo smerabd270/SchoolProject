@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchoolProjectData.Commons;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SchoolProjectData.Entities
 {
-    public class Department
+    public class Department: LocalizabileEntity
     {
         public Department()
         {
@@ -17,7 +18,7 @@ namespace SchoolProjectData.Entities
         }
         [Key]
         public int DID { get; set; }
-        public string DName { get; set; }
+     
         [InverseProperty("Departments")]
         public ICollection<Student> Students { get; set; }
         public ICollection<DepartmentSubject> Departments { get; set; }

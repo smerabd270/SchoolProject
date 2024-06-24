@@ -17,10 +17,7 @@ namespace SchoolProjectCore.Base
             _stringLocalizer = stringLocalizer;
         }
 
-        public ResponseHandler()
-        {
-
-        }
+     
         public Response<T> Deleted<T>()
         {
             return new Response<T>()
@@ -97,7 +94,7 @@ namespace SchoolProjectCore.Base
             {
                 StatusCode = System.Net.HttpStatusCode.OK,
 
-                Message = message != null ? message : _stringLocalizer[SharedResourcesKeys.AddDone]
+                Message = message != null ? message : _stringLocalizer[SharedResourcesKeys.Success]
 
 
             };

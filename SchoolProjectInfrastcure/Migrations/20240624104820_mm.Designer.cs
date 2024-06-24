@@ -12,8 +12,8 @@ using SchoolProjectInfrastrcure.Data;
 namespace SchoolProjectInfrastrcure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240620112133_m")]
-    partial class m
+    [Migration("20240624104820_mm")]
+    partial class mm
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,11 @@ namespace SchoolProjectInfrastrcure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DID"), 1L, 1);
 
-                    b.Property<string>("DName")
+                    b.Property<string>("DNameAr")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DNameEn")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -85,7 +89,12 @@ namespace SchoolProjectInfrastrcure.Migrations
                     b.Property<int?>("DID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("NameAr")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("NameEn")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
@@ -136,7 +145,11 @@ namespace SchoolProjectInfrastrcure.Migrations
                     b.Property<DateTime>("Period")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("SubjectName")
+                    b.Property<string>("SubjectNameAr")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubjectNameEn")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

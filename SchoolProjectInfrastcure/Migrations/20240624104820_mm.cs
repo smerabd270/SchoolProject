@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SchoolProjectInfrastrcure.Migrations
 {
-    public partial class intialDatabase : Migration
+    public partial class mm : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,8 @@ namespace SchoolProjectInfrastrcure.Migrations
                 {
                     SubjectId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SubjectName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SubjectNameAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SubjectNameEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Period = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -29,7 +30,8 @@ namespace SchoolProjectInfrastrcure.Migrations
                 {
                     DID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DNameAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DNameEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubjectId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -74,7 +76,8 @@ namespace SchoolProjectInfrastrcure.Migrations
                 {
                     StuID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    NameAr = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    NameEn = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     DID = table.Column<int>(type: "int", nullable: true)

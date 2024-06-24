@@ -25,7 +25,7 @@ namespace SchoolProjectCore.Queries.Handlers
         private readonly IMapper _mapper;
         private readonly IStringLocalizer<SharedResources>  _stringLocalizer;
 
-        public StudentListHandler(IStudentService studentService, IMapper mapper, IStringLocalizer<SharedResources> stringLocalizer)
+        public StudentListHandler(IStudentService studentService, IMapper mapper, IStringLocalizer<SharedResources> stringLocalizer):base(stringLocalizer)
         {
             _studentService = studentService;
             _mapper = mapper;
@@ -52,7 +52,7 @@ namespace SchoolProjectCore.Queries.Handlers
         public async Task<PaginatedResult<GetStudentPaginatedListResponse>> Handle(GetStudentPaginatedListQuery request, CancellationToken cancellationToken)
         {
             Expression<Func<Student, GetStudentPaginatedListResponse>> expression =
-                          e => new GetStudentPaginatedListResponse(e.StuID, e.Name, e.Address, e.Departments.DName);
+                          e => new GetStudentPaginatedListResponse(e.StuID, e.NameEn, e.Address, e.Departments.GetLocalized());
             var querable = _studentService.GetAllStudentsQueryable( request.OrderBy,request.Search);
             var paginatedList = await querable.Select(expression).ToPaginatedListAsync(request.PageNumber, request.PageSize);
             return paginatedList;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchoolProjectData.Commons;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SchoolProjectData.Entities
 {
-    public class Subject
+    public class Subject: LocalizabileEntity
     {
         public Subject()
         {
@@ -17,7 +18,6 @@ namespace SchoolProjectData.Entities
 
         [Key]
         public int SubjectId { get; set; }
-        public string SubjectName { get; set; }
         public DateTime Period { get; set; }
         public virtual ICollection<StudentSubject> StudentSubjects { get; set; }
         public virtual ICollection<Department> Departments { get; set; }

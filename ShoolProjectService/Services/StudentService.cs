@@ -47,7 +47,7 @@ namespace ShoolProjectService.Services
         {
             var students = _studentRepository.GetAllStudentsQueryable();
             if (!string.IsNullOrEmpty(serach))
-                students = students.Where(x => x.Name.Contains(serach) || x.Address.Contains(serach));
+                students = students.Where(x => x.NameEn.Contains(serach) || x.Address.Contains(serach));
             return students;
         }
     }
