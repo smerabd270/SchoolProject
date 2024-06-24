@@ -13,7 +13,7 @@ namespace SchoolProjectCore.Resources
         public const string DeletedDone = "DeletedDone";
         public const string Success = "Success";
         public const string Unauthorized = "Unauthorized";
-
+        public const string AddDone = "AddDone";
         public const string BadRequest = "BadRequest";
 
 
