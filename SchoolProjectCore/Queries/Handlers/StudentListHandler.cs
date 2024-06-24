@@ -55,6 +55,7 @@ namespace SchoolProjectCore.Queries.Handlers
                           e => new GetStudentPaginatedListResponse(e.StuID, e.NameEn, e.Address, e.Departments.GetLocalized());
             var querable = _studentService.GetAllStudentsQueryable( request.OrderBy,request.Search);
             var paginatedList = await querable.Select(expression).ToPaginatedListAsync(request.PageNumber, request.PageSize);
+            paginatedList.Meta = new {count= paginatedList.Data.Count() };
             return paginatedList;
         }
     }
