@@ -14,14 +14,23 @@ namespace SchoolProjectData.Entities
         public Department()
         {
             Students = new HashSet<Student>();
-            Departments = new HashSet<DepartmentSubject>();
+            DepartmentSubjects = new HashSet<DepartmentSubject>();
+            Instructors=new HashSet<Instructor>();
         }
         [Key]
         public int DID { get; set; }
+        public int InsManager { get; set; }
      
-        [InverseProperty("Departments")]
-        public ICollection<Student> Students { get; set; }
-        public ICollection<DepartmentSubject> Departments { get; set; }
+        [InverseProperty("Department")]
+        public virtual ICollection<Student> Students { get; set; }
+        [InverseProperty("Department")]
+        public virtual ICollection<DepartmentSubject> DepartmentSubjects { get; set; }
+        [InverseProperty("Department")]
+
+        public virtual ICollection<Instructor> Instructors { get; set; }
+        [ForeignKey("InsManager")]
+        [InverseProperty("DepartmentManager")]
+        public virtual Instructor Instructor { get; set; }
 
     }
 }

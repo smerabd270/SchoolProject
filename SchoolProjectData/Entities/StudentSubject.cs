@@ -11,12 +11,16 @@ namespace SchoolProjectData.Entities
     public class StudentSubject
     {
         [Key]
-        public int StudSubID { get; set; }
+       // public int StudSubID { get; set; }
         public int StudID { get; set; }
+        [Key]
         public int SubID { get; set; }
         [ForeignKey("StudID")]
+        [InverseProperty("StudentSubjects")]
+
         public virtual Student Students { get; set; }
         [ForeignKey("SubID")]
+        [InverseProperty("StudentSubjects")]
         public virtual Subject SubjectS { get; set; }
 
     }

@@ -11,6 +11,10 @@ namespace SchoolProjectData.Entities
 {
     public  class Student: LocalizabileEntity
     {
+        public Student()
+        {
+            StudentSubjects= new HashSet<StudentSubject>();
+        }
         [Key]
         public int StuID{ get; set; }
         
@@ -21,6 +25,8 @@ namespace SchoolProjectData.Entities
         public int? DID { get; set; }
         [ForeignKey("DID")]
         [InverseProperty("Students")]
-        public virtual Department Departments { get; set; }
+        public virtual Department Department { get; set; }
+        [InverseProperty("Students")]
+        public virtual ICollection<StudentSubject> StudentSubjects { get;}
     }
 }
