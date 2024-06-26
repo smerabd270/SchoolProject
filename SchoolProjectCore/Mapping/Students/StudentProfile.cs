@@ -15,9 +15,9 @@ namespace SchoolProjectCore.Mapping.Students
         public StudentProfile()
         {
             CreateMap<Student, GetStudentListResponse>()
-                .ForMember(dest=>dest.DepartmentName,opt=>opt.MapFrom(dest=>dest.Departments.GetLocalized()));
+                .ForMember(dest=>dest.DepartmentName,opt=>opt.MapFrom(dest=>dest.Department.GetLocalized()));
             CreateMap<Student, GetStudentSingleResponse>()
-            .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(dest => dest.Departments.GetLocalized()));
+            .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(dest => dest.Department.GetLocalized()));
             CreateMap<Student, AddStudentCommand>()
                 .ForMember(dest => dest.DepartmentId, opt => opt.MapFrom(dest => dest.DID))
             .ReverseMap();

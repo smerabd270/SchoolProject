@@ -18,6 +18,7 @@ namespace SchoolProjectData.Entities
             Instructors=new HashSet<Instructor>();
         }
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DID { get; set; }
         public int InsManager { get; set; }
      

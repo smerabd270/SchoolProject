@@ -20,13 +20,13 @@ namespace SchoolProjectInfrastrcure.Repositories
 
         public async Task<List<Student>> GetStudentsListAsync()
         {
-            return await _applicationDbContext.students.Include(x => x.Departments)
+            return await _applicationDbContext.students.Include(x => x.Department)
                 .ToListAsync();
         }
         public async Task<Student> GetStudentByIdAsync(int id)
         {
             return await _applicationDbContext.students
-                .Include(x => x.Departments).AsNoTracking()
+                .Include(x => x.Department).AsNoTracking()
                 .FirstOrDefaultAsync(x => x.StuID == id);
         }
         public async Task<string> AddStudentASync(Student student)
@@ -79,7 +79,7 @@ namespace SchoolProjectInfrastrcure.Repositories
         }
         public IQueryable<Student> GetAllStudentsQueryable()
         {
-            return _applicationDbContext.students.Include (x=>x.Departments).AsQueryable();
+            return _applicationDbContext.students.Include (x=>x.Department).AsQueryable();
         }
     }
 }

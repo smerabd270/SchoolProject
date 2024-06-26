@@ -11,6 +11,7 @@ namespace SchoolProjectData.Entities
     public class DepartmentSubject
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DepSubID { get; set; }
         public int DID { get; set; }
         public int SubID { get; set; }

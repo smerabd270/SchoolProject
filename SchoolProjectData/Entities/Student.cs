@@ -16,6 +16,8 @@ namespace SchoolProjectData.Entities
             StudentSubjects= new HashSet<StudentSubject>();
         }
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int StuID{ get; set; }
         
         [StringLength(200)]

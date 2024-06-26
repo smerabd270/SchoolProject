@@ -19,6 +19,8 @@ namespace SchoolProjectData.Entities
         }
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int SubjectId { get; set; }
         public DateTime Period { get; set; }
         [InverseProperty("SubjectS")]
