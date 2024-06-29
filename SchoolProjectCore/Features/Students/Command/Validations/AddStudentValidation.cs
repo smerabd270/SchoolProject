@@ -24,7 +24,7 @@ namespace SchoolProjectCore.Features.Students.Command.Validations
         
         public void ApplyValidationRule()
         {
-            RuleFor(x => x.Name)
+            RuleFor(x => x.NameAr)
                 .NotEmpty().WithMessage("Name mus not be embty")
                 .NotNull().WithMessage("Name mus not be null")
                 .MaximumLength(30).WithMessage("Name max length is 30");
@@ -37,7 +37,7 @@ namespace SchoolProjectCore.Features.Students.Command.Validations
         }
         public void ApplyCustomValidationRule()
         {
-            RuleFor(x => x.Name)
+            RuleFor(x => x.NameEn)
                 .MustAsync(async (Key, CancellationToken) => !await _studentService.IsNameExit(Key)).WithMessage("Name Exit");
         }
     }

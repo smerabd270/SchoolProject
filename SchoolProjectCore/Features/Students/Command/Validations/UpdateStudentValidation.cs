@@ -23,10 +23,14 @@ namespace SchoolProjectCore.Features.Students.Command.Validations
 
         public void ApplyValidationRule()
         {
-            RuleFor(x => x.Name)
+            RuleFor(x => x.NameAr)
                 .NotEmpty().WithMessage("Name mus not be embty")
                 .NotNull().WithMessage("Name mus not be null")
                 .MaximumLength(30).WithMessage("Name max length is 30");
+            RuleFor(x => x.NameEn)
+               .NotEmpty().WithMessage("Name mus not be embty")
+               .NotNull().WithMessage("Name mus not be null")
+               .MaximumLength(30).WithMessage("Name max length is 30");
             RuleFor(x => x.Address)
                .NotEmpty().WithMessage("Address mus not be embty")
                .NotNull().WithMessage("Address mus not be null")

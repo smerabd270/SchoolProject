@@ -20,7 +20,7 @@ namespace SchoolProjectData.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DID { get; set; }
-        public int InsManager { get; set; }
+        public int? InsManager { get; set; }
      
         [InverseProperty("Department")]
         public virtual ICollection<Student> Students { get; set; }
@@ -31,7 +31,7 @@ namespace SchoolProjectData.Entities
         public virtual ICollection<Instructor> Instructors { get; set; }
         [ForeignKey("InsManager")]
         [InverseProperty("DepartmentManager")]
-        public virtual Instructor Instructor { get; set; }
+        public virtual Instructor? Instructor { get; set; }
 
     }
 }

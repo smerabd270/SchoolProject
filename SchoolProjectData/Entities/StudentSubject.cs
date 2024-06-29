@@ -15,6 +15,7 @@ namespace SchoolProjectData.Entities
         public int StudID { get; set; }
         [Key]
         public int SubID { get; set; }
+        public decimal? Grade { get; set; }
         [ForeignKey("StudID")]
         [InverseProperty("StudentSubjects")]
 
