@@ -22,7 +22,7 @@ namespace SchoolProjectData.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
         public int SubjectId { get; set; }
-        public DateTime Period { get; set; }
+        public int ? Period { get; set; }
         [InverseProperty("SubjectS")]
         public virtual ICollection<StudentSubject> StudentSubjects { get; set; }
         [InverseProperty("Subject")]

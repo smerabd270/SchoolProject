@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SchoolProjectInfrastrcure.Abstract;
+using SchoolProjectInfrastrcure.InfrastructureBases;
 using SchoolProjectInfrastrcure.Repositories;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,13 @@ namespace SchoolProjectInfrastrcure
     {
         public static IServiceCollection AddInfrastrctureDependencies(this IServiceCollection services)
         {
+            services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
             services.AddTransient<IStudentRepository, StudentRepository>();
+            services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+            services.AddTransient<ISubjectRepository, SubjectRepository>();
+            services.AddTransient<IInstructorRepository, InstructorRepository>();
+
+
             return services;
         }
     }

@@ -198,8 +198,8 @@ namespace SchoolProjectInfrastrcure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Period")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("Period")
+                        .HasColumnType("int");
 
                     b.HasKey("SubjectId");
 

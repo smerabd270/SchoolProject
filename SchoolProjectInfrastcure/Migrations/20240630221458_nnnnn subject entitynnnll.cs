@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace SchoolProjectInfrastrcure.Migrations
 {
-    public partial class mmmllllmmm : Migration
+    public partial class nnnnnsubjectentitynnnll : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +14,7 @@ namespace SchoolProjectInfrastrcure.Migrations
                 {
                     SubjectId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Period = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Period = table.Column<int>(type: "int", nullable: true),
                     NameAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NameEn = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -30,7 +29,7 @@ namespace SchoolProjectInfrastrcure.Migrations
                 {
                     DID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    InsManager = table.Column<int>(type: "int", nullable: false),
+                    InsManager = table.Column<int>(type: "int", nullable: true),
                     NameAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NameEn = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -73,7 +72,7 @@ namespace SchoolProjectInfrastrcure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Postion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SupervisorId = table.Column<int>(type: "int", nullable: false),
+                    SupervisorId = table.Column<int>(type: "int", nullable: true),
                     Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DID = table.Column<int>(type: "int", nullable: false),
                     NameAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -147,7 +146,8 @@ namespace SchoolProjectInfrastrcure.Migrations
                 columns: table => new
                 {
                     StudID = table.Column<int>(type: "int", nullable: false),
-                    SubID = table.Column<int>(type: "int", nullable: false)
+                    SubID = table.Column<int>(type: "int", nullable: false),
+                    Grade = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -170,7 +170,8 @@ namespace SchoolProjectInfrastrcure.Migrations
                 name: "IX_departments_InsManager",
                 table: "departments",
                 column: "InsManager",
-                unique: true);
+                unique: true,
+                filter: "[InsManager] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_departmentSubjects_DID",
