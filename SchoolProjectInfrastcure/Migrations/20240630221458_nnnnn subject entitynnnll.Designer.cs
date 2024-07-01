@@ -12,8 +12,8 @@ using SchoolProjectInfrastrcure.Data;
 namespace SchoolProjectInfrastrcure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240626221017_mmmllllmmm")]
-    partial class mmmllllmmm
+    [Migration("20240630221458_nnnnn subject entitynnnll")]
+    partial class nnnnnsubjectentitynnnll
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,7 @@ namespace SchoolProjectInfrastrcure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DID"), 1L, 1);
 
-                    b.Property<int>("InsManager")
+                    b.Property<int?>("InsManager")
                         .HasColumnType("int");
 
                     b.Property<string>("NameAr")
@@ -46,7 +46,8 @@ namespace SchoolProjectInfrastrcure.Migrations
                     b.HasKey("DID");
 
                     b.HasIndex("InsManager")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[InsManager] IS NOT NULL");
 
                     b.ToTable("departments");
                 });
@@ -117,7 +118,7 @@ namespace SchoolProjectInfrastrcure.Migrations
                     b.Property<decimal>("Salary")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("SupervisorId")
+                    b.Property<int?>("SupervisorId")
                         .HasColumnType("int");
 
                     b.HasKey("InsId");
@@ -173,6 +174,9 @@ namespace SchoolProjectInfrastrcure.Migrations
                     b.Property<int>("StudID")
                         .HasColumnType("int");
 
+                    b.Property<decimal?>("Grade")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("SubID", "StudID");
 
                     b.HasIndex("StudID");
@@ -196,8 +200,8 @@ namespace SchoolProjectInfrastrcure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Period")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("Period")
+                        .HasColumnType("int");
 
                     b.HasKey("SubjectId");
 
@@ -209,8 +213,7 @@ namespace SchoolProjectInfrastrcure.Migrations
                     b.HasOne("SchoolProjectData.Entities.Instructor", "Instructor")
                         .WithOne("DepartmentManager")
                         .HasForeignKey("SchoolProjectData.Entities.Department", "InsManager")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Instructor");
                 });
@@ -264,8 +267,7 @@ namespace SchoolProjectInfrastrcure.Migrations
                     b.HasOne("SchoolProjectData.Entities.Instructor", "Supervisor")
                         .WithMany("Instructors")
                         .HasForeignKey("SupervisorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Department");
 
