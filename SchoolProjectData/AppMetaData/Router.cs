@@ -25,6 +25,19 @@ namespace SchoolProjectData.AppMetaData
             public const string GetById = Prefix + "/{id}";
 
         }
+        public static class Department
+        {
+            public const string Prefix = Rule + "Department";
+            public const string List = Prefix + "List";
+            public const string Add = Prefix + "Add";
+            public const string Update = Prefix + "Update";
+            public const string Delete = Prefix + "Delete";
+            public const string PagenatedList = Prefix + "PagenatedList";
+
+
+            public const string GetById = Prefix + "/{id}";
+
+        }
 
     }
 }
