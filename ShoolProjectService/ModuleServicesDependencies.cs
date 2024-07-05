@@ -15,6 +15,8 @@ namespace ShoolProjectService
         public static IServiceCollection AddServicesDependencies(this IServiceCollection services)
         {
             services.AddTransient<IStudentService, StudentService>();
+            services.AddTransient<IDepartmentService, DepartmentService>();
+
             return services;
         }
     }
