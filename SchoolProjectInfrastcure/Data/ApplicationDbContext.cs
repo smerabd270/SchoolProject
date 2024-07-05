@@ -1,19 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolProjectData.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EntityFrameworkCore.EncryptColumn.Extension;
+using EntityFrameworkCore.EncryptColumn.Interfaces;
+using EntityFrameworkCore.EncryptColumn.Util;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using SchoolProjectData.Entities.Identity;
 
 namespace SchoolProjectInfrastrcure.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
         public DbSet<Department> departments { get; set; }
+        public DbSet<User> User { get; set; }
         public DbSet<DepartmentSubject> departmentSubjects { get; set; }
         public DbSet<Student> students { get; set; }
         public DbSet<StudentSubject> studentSubjects { get; set; }

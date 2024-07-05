@@ -12,8 +12,8 @@ using SchoolProjectInfrastrcure.Data;
 namespace SchoolProjectInfrastrcure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240630221458_nnnnn subject entitynnnll")]
-    partial class nnnnnsubjectentitynnnll
+    [Migration("20240703130723_mmmmmmmmm")]
+    partial class mmmmmmmmm
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
