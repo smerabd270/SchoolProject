@@ -22,6 +22,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastrctureDependencies()
     .AddServicesDependencies()
+    .AddServiceRegsitration()
     .AddCoreDependencies();
 #region localization
 builder.Services.AddControllersWithViews();
