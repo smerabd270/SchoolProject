@@ -10,7 +10,9 @@ using SchoolProjectData.Entities.Identity;
 
 namespace SchoolProjectInfrastrcure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<User,IdentityRole<int>,int>
+        //IdentityDbContext<User,IdentityRole<int>,int,IdentityUserClaim<int>,IdentityUserRole<int>
+                                                                               // ,IdentityRoleClaim<int>,IdentityUserToken<int>>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
