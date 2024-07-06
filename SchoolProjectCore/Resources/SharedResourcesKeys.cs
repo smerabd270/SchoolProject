@@ -15,6 +15,11 @@ namespace SchoolProjectCore.Resources
         public const string Unauthorized = "Unauthorized";
         public const string AddDone = "AddDone";
         public const string BadRequest = "BadRequest";
+        public const string PasswordNotEqualConfirmPass = "PasswordNotEqualConfirmPass";
+        public const string MaxLengthis100 = "MaxLengthis100";
+
+        public const string NotEmpty = "NotEmpty";
+
 
 
     }

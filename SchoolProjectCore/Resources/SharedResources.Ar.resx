@@ -126,8 +126,17 @@
   <data name="DeletedDone" xml:space="preserve">
     <value>تم الحذف</value>
   </data>
+  <data name="MaxLengthis100MaxLengthis100" xml:space="preserve">
+    <value>القيمة العظمى100</value>
+  </data>
+  <data name="NotEmpty" xml:space="preserve">
+    <value>لا يقبل قيمة فارغة</value>
+  </data>
   <data name="NotFound" xml:space="preserve">
     <value>غير موجود</value>
+  </data>
+  <data name="PasswordNotEqualConfirmPass" xml:space="preserve">
+    <value>كلمة المرور غير مطابقة</value>
   </data>
   <data name="Required" xml:space="preserve">
     <value>مطلوب</value>

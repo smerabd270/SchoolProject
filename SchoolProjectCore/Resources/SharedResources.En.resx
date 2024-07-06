@@ -126,6 +126,12 @@
   <data name="DeletedDone" xml:space="preserve">
     <value>Deleted Done</value>
   </data>
+  <data name="MaxLengthis100" xml:space="preserve">
+    <value>Max Length is100</value>
+  </data>
+  <data name="NotEmpty" xml:space="preserve">
+    <value>Not Empty</value>
+  </data>
   <data name="NotFound" xml:space="preserve">
     <value>Not Found</value>
   </data>
