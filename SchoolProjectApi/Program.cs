@@ -21,9 +21,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastrctureDependencies()
-    .AddServicesDependencies()
-    //.AddServiceRegsitration()
-    .AddCoreDependencies();
+                 .AddServicesDependencies()
+                 .AddCoreDependencies();
+                 //.AddServiceRegsitration();
 #region localization
 builder.Services.AddControllersWithViews();
 builder.Services.AddLocalization(opt =>
