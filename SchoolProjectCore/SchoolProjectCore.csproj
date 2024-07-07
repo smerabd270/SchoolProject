@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Departments\Command\" />
-    <Folder Include="Features\User\Command\Handler\" />
     <Folder Include="Features\User\Querise\Handler\" />
     <Folder Include="Features\User\Querise\Model\" />
     <Folder Include="Features\User\Querise\Response\" />
