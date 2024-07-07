@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolProjectCore.Features.User.Command.Model
+namespace SchoolProjectCore.Features.AppUser.Command.Model
 {
     public class AddUserCommand : IRequest<Response<string>>
     {

@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\User\**" />
+    <EmbeddedResource Remove="Features\User\**" />
+    <None Remove="Features\User\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SchoolProjectData\SchoolProjectData.csproj" />
     <ProjectReference Include="..\SchoolProjectInfrastcure\SchoolProjectInfrastrcure.csproj" />
     <ProjectReference Include="..\ShoolProjectService\ShoolProjectService.csproj" />
@@ -24,9 +30,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Departments\Command\" />
-    <Folder Include="Features\User\Querise\Handler\" />
-    <Folder Include="Features\User\Querise\Model\" />
-    <Folder Include="Features\User\Querise\Response\" />
   </ItemGroup>
 
 </Project>

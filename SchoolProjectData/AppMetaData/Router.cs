@@ -33,6 +33,17 @@ namespace SchoolProjectData.AppMetaData
             public const string Update = Prefix + "Update";
             public const string Delete = Prefix + "Delete";
             public const string PagenatedList = Prefix + "PagenatedList";
+            public const string GetById = Prefix + "/{id}";
+
+        }
+        public static class UserRouting
+        {
+            public const string Prefix = Rule + "User";
+            public const string List = Prefix + "List";
+            public const string Add = Prefix + "Register";
+            public const string Update = Prefix + "Update";
+            public const string Delete = Prefix + "Delete";
+            public const string PagenatedList = Prefix + "PagenatedList";
 
 
             public const string GetById = Prefix + "/{id}";
