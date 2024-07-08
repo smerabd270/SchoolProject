@@ -9,7 +9,7 @@ namespace SchoolProjectInfrastrcure.Repositories
     public class InstructorRepository : GenericRepositoryAsync<Instructor>, IInstructorRepository
     {
         private DbSet<Instructor>  instructors;
-        public InstructorRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public InstructorRepository(ApplicationDBContext dbContext) : base(dbContext)
         {
             instructors = dbContext.Set<Instructor>();
         }

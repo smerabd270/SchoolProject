@@ -11,7 +11,7 @@ using SchoolProjectInfrastrcure.Data;
 
 namespace SchoolProjectInfrastrcure.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(ApplicationDBContext))]
     [Migration("20240706002250_mmm")]
     partial class mmm
     {

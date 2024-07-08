@@ -20,12 +20,12 @@ namespace SchoolProjectCore.Features.AppUser.Command.Handler
     {
         private readonly IMapper _mapper;
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
-     //   private readonly UserManager<User> _userManager;
-        public UserCommandHandler(IMapper mapper, IStringLocalizer<SharedResources> stringLocalizer) : base(stringLocalizer)
+      private readonly UserManager<User> _userManager;
+        public UserCommandHandler(IMapper mapper, IStringLocalizer<SharedResources> stringLocalizer, UserManager<User> userManager) : base(stringLocalizer)
         {
             _mapper = mapper;
             _stringLocalizer = stringLocalizer;
-          //  _userManager = userManager;
+          _userManager = userManager;
         }
 
         public Task<Response<string>> Handle(AddUserCommand request, CancellationToken cancellationToken)

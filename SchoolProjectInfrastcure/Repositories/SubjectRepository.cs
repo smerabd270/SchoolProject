@@ -9,7 +9,7 @@ namespace SchoolProjectInfrastrcure.Repositories
     public class SubjectRepository : GenericRepositoryAsync<Subject>, ISubjectRepository
     {
         private DbSet<Subject> subjects;
-        public SubjectRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public SubjectRepository(ApplicationDBContext dbContext) : base(dbContext)
         {
             subjects = dbContext.Set<Subject>();
         }

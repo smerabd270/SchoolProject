@@ -8,12 +8,12 @@ namespace SchoolProjectInfrastrcure.InfrastructureBases
     {
         #region Vars / Props
 
-        protected readonly ApplicationDbContext _dbContext;
+        protected readonly ApplicationDBContext _dbContext;
 
         #endregion
 
         #region Constructor(s)
-        public GenericRepositoryAsync(ApplicationDbContext dbContext)
+        public GenericRepositoryAsync(ApplicationDBContext dbContext)
         {
             _dbContext = dbContext;
         }

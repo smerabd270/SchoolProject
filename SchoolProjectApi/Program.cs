@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SchoolProjectCore;
 using SchoolProjectCore.Middleware;
+using SchoolProjectData.Entities.Identity;
 using SchoolProjectInfrastrcure;
 using SchoolProjectInfrastrcure.Data;
 using ShoolProjectService;
@@ -15,15 +17,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefualtConnection"));
 });
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddInfrastrctureDependencies()
                  .AddServicesDependencies()
-                 .AddCoreDependencies();
-                 //.AddServiceRegsitration();
+                 .AddCoreDependencies()
+                .AddServiceRegisteration();
 #region localization
 builder.Services.AddControllersWithViews();
 builder.Services.AddLocalization(opt =>

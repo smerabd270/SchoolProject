@@ -7,14 +7,18 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SchoolProjectData.Entities.Identity;
+using System.Data;
 
 namespace SchoolProjectInfrastrcure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User,IdentityRole<int>,int>
-        //IdentityDbContext<User,IdentityRole<int>,int,IdentityUserClaim<int>,IdentityUserRole<int>
-                                                                               // ,IdentityRoleClaim<int>,IdentityUserToken<int>>
+    public class ApplicationDBContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
+    
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        public ApplicationDBContext()
+        {
+
+        }
+        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
         }
         public DbSet<Department> departments { get; set; }

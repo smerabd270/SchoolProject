@@ -14,7 +14,7 @@ namespace SchoolProjectInfrastrcure.Repositories
     public class DepartmentRepository : GenericRepositoryAsync<Department>, IDepartmentRepository
     {
         private DbSet<Department> departments;
-        public DepartmentRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public DepartmentRepository(ApplicationDBContext dbContext) : base(dbContext)
         {
             departments=dbContext.Set<Department>();
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using SchoolProjectInfrastrcure.Abstract;
 using SchoolProjectInfrastrcure.InfrastructureBases;
 using SchoolProjectInfrastrcure.Repositories;
@@ -19,7 +20,7 @@ namespace SchoolProjectInfrastrcure
             services.AddTransient<IDepartmentRepository, DepartmentRepository>();
             services.AddTransient<ISubjectRepository, SubjectRepository>();
             services.AddTransient<IInstructorRepository, InstructorRepository>();
-
+            
 
             return services;
         }

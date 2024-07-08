@@ -12,33 +12,33 @@ namespace SchoolProjectInfrastrcure.Repositories
 {
     public class StudentRepository : IStudentRepository
     {
-        private readonly ApplicationDbContext _applicationDbContext;
-        public StudentRepository(ApplicationDbContext applicationDbContext)
+        private readonly ApplicationDBContext _ApplicationDBContext;
+        public StudentRepository(ApplicationDBContext ApplicationDBContext)
         {
-            _applicationDbContext = applicationDbContext;
+            _ApplicationDBContext = ApplicationDBContext;
         }
 
         public async Task<List<Student>> GetStudentsListAsync()
         {
-            return await _applicationDbContext.students.Include(x => x.Department)
+            return await _ApplicationDBContext.students.Include(x => x.Department)
                 .ToListAsync();
         }
         public async Task<Student> GetStudentByIdAsync(int id)
         {
-            return await _applicationDbContext.students
+            return await _ApplicationDBContext.students
                 .Include(x => x.Department).AsNoTracking()
                 .FirstOrDefaultAsync(x => x.StuID == id);
         }
         public async Task<string> AddStudentASync(Student student)
         {
-            var exsitStudent = await _applicationDbContext.students.Where(x => x.NameEn == student.NameEn).FirstOrDefaultAsync();
+            var exsitStudent = await _ApplicationDBContext.students.Where(x => x.NameEn == student.NameEn).FirstOrDefaultAsync();
             if (exsitStudent != null)
 
                 return "exsit";
             else
             {
-             await   _applicationDbContext.students.AddAsync(student);
-               await _applicationDbContext.SaveChangesAsync();
+             await   _ApplicationDBContext.students.AddAsync(student);
+               await _ApplicationDBContext.SaveChangesAsync();
                 return "success";
             }
 
@@ -46,14 +46,14 @@ namespace SchoolProjectInfrastrcure.Repositories
         }
         public async Task<bool>IsNameExit(string name)
         {
-            return await _applicationDbContext.students.AnyAsync(x => x.NameEn == name);
+            return await _ApplicationDBContext.students.AnyAsync(x => x.NameEn == name);
         }
         public async Task<string> UpdateStudentAsync(Student student)
         {
             try
             {
-                _applicationDbContext.students.Update(student);
-                await _applicationDbContext.SaveChangesAsync();
+                _ApplicationDBContext.students.Update(student);
+                await _ApplicationDBContext.SaveChangesAsync();
                 return ("Sccuess");
             }
             catch (Exception ex)
@@ -66,9 +66,9 @@ namespace SchoolProjectInfrastrcure.Repositories
         {
             try
             {
-              var student= await  _applicationDbContext.students.Where(x=>x.StuID== Id).FirstAsync();
-                 _applicationDbContext.students.Remove(student);
-                await _applicationDbContext.SaveChangesAsync();
+              var student= await  _ApplicationDBContext.students.Where(x=>x.StuID== Id).FirstAsync();
+                 _ApplicationDBContext.students.Remove(student);
+                await _ApplicationDBContext.SaveChangesAsync();
                 return ("Sccuess");
             }
             catch (Exception ex)
@@ -79,7 +79,7 @@ namespace SchoolProjectInfrastrcure.Repositories
         }
         public IQueryable<Student> GetAllStudentsQueryable()
         {
-            return _applicationDbContext.students.Include (x=>x.Department).AsQueryable();
+            return _ApplicationDBContext.students.Include (x=>x.Department).AsQueryable();
         }
     }
 }
