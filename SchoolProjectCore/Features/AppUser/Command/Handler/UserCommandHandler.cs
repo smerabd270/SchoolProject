@@ -28,32 +28,29 @@ namespace SchoolProjectCore.Features.AppUser.Command.Handler
           _userManager = userManager;
         }
 
-        public Task<Response<string>> Handle(AddUserCommand request, CancellationToken cancellationToken)
+
+        public async Task<Response<string>> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var CheckUserEmail = await _userManager.FindByEmailAsync(request.Email);
+            if (CheckUserEmail != null)
+            {
+                return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
+            }
+            var CheckUserName = await _userManager.FindByNameAsync(request.UserName);
+            if (CheckUserName != null)
+            {
+                return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
+
+            }
+    var newUser = _mapper.Map<User>(request);
+    var createUser = await _userManager.CreateAsync(newUser);
+            if (!createUser.Succeeded) 
+            {
+                return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
+
+            }
+
+return SuccessMessage<string>(_stringLocalizer[SharedResourcesKeys.Success]);
         }
-        //public async Task<Response<string>> Handle(AddUserCommand request, CancellationToken cancellationToken)
-        //{
-        //    var CheckUserEmail= await _userManager.FindByEmailAsync(request.Email);
-        //    if (CheckUserEmail != null)
-        //    {
-        //        return   BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
-        //    }
-        //    var CheckUserName = await _userManager.FindByNameAsync(request.UserName);
-        //    if (CheckUserName != null)
-        //    {
-        //        return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
-
-        //    }
-        //    var newUser= _mapper.Map<User>(request);
-        //    var createUser= await _userManager.CreateAsync(newUser);
-        //    if (!createUser.Succeeded) 
-        //    {
-        //        return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
-
-        //    }
-
-        //    return SuccessMessage<string>("null");
-        //}
     }
 }
