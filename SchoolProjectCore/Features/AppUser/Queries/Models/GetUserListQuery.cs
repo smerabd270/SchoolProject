@@ -11,5 +11,8 @@ namespace SchoolProjectCore.Features.AppUser.Queries.Models
 {
     public  class GetUserListQuery:IRequest<PaginatedResult<GetUserListResponse>>
     {
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
+
     }
 }

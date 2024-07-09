@@ -29,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\AppUser\Queries\Handlers\" />
     <Folder Include="Features\Departments\Command\" />
   </ItemGroup>
 
