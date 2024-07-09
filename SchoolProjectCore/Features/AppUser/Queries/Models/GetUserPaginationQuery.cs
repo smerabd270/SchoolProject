@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SchoolProjectCore.Features.AppUser.Queries.Models
 {
-    public  class GetUserListQuery:IRequest<PaginatedResult<GetUserListResponse>>
+    public  class GetUserPaginationQuery:IRequest<PaginatedResult<GetUserListResponse>>
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
