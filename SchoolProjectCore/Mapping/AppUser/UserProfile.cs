@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SchoolProjectCore.Features.AppUser.Command.Model;
+using SchoolProjectCore.Queries.Response;
 using SchoolProjectData.Entities.Identity;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace SchoolProjectCore.Mapping.AppUser
         public UserProfile() 
         {
             CreateMap<User, AddUserCommand>()
+                .ReverseMap();
+            CreateMap<User, GetStudentListResponse>()
                 .ReverseMap();
         }
     }
