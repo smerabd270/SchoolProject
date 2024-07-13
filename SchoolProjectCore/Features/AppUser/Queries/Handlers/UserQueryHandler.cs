@@ -6,6 +6,7 @@ using Microsoft.Extensions.Localization;
 using SchoolProjectCore.Base;
 using SchoolProjectCore.Features.AppUser.Queries.Models;
 using SchoolProjectCore.Features.AppUser.Queries.Response;
+using SchoolProjectCore.Queries.Response;
 using SchoolProjectCore.Resources;
 using SchoolProjectCore.Warppers;
 using SchoolProjectData.Entities.Identity;
@@ -19,6 +20,7 @@ using System.Threading.Tasks;
 namespace SchoolProjectCore.Features.AppUser.Queries.Handlers
 {
     public class UserQueryHandler : ResponseHandler, IRequestHandler<GetUserPaginationQuery, PaginatedResult<GetUserListResponse>>
+                                                   ,IRequestHandler<GetUserByIdQuery, Response<GetUserByIdResponse>>
     {
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
@@ -35,6 +37,15 @@ namespace SchoolProjectCore.Features.AppUser.Queries.Handlers
             var users =  _userManager.Users.AsQueryable();
             var pageList =await  _mapper.ProjectTo<GetUserListResponse>(users).ToPaginatedListAsync(request.PageNumber,request.PageSize);
             return pageList;
+        }
+
+        public async  Task<Response<GetUserByIdResponse>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+        {
+            var user = await _userManager.Users.FirstOrDefaultAsync(x=> x.Id == request.Id);
+            if (user == null)
+                return NotFound<GetUserByIdResponse>(_stringLocalizer[SharedResourcesKeys.NotFound]);
+            var result = _mapper.Map<GetUserByIdResponse>(user);
+            return Success(result);
         }
     }
 
