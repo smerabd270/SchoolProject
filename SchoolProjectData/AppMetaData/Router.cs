@@ -44,6 +44,8 @@ namespace SchoolProjectData.AppMetaData
             public const string Update = Prefix + "Update";
             public const string Delete = Prefix + "Delete";
             public const string PagenatedList = Prefix + "PagenatedList";
+            public const string ChangePassword = Prefix + "/Change-Password";
+
 
 
             public const string GetById = Prefix + "/{id}";
