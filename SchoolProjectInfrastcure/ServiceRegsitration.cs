@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using SchoolProject.Data.Helpers;
 using SchoolProjectData.Entities.Identity;
 using SchoolProjectInfrastrcure.Abstract;
 using SchoolProjectInfrastrcure.Data;
@@ -16,8 +19,9 @@ namespace SchoolProjectInfrastrcure
 {
     public static class ServiceRegsitration
     {
-       
-            public static IServiceCollection AddServiceRegisteration(this IServiceCollection services)
+
+        public static IServiceCollection AddServiceRegisteration(this IServiceCollection services, IConfiguration configuration)
+        {
             {
                 services.AddIdentity<User, Role>(option =>
                 {
@@ -41,8 +45,37 @@ namespace SchoolProjectInfrastrcure
                     option.SignIn.RequireConfirmedEmail = true;
 
                 }).AddEntityFrameworkStores<ApplicationDBContext>();
+                //JWT Authentication
+                var jwtSettings = new JwtSettings();
+                var emailSettings = new EmailSettings();
+                configuration.GetSection(nameof(jwtSettings)).Bind(jwtSettings);
+                configuration.GetSection(nameof(emailSettings)).Bind(emailSettings);
 
-            return services;
+                services.AddSingleton(jwtSettings);
+                services.AddSingleton(emailSettings);
+
+                services.AddAuthentication(x =>
+                {
+                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+               .AddJwtBearer(x =>
+               {
+                   x.RequireHttpsMetadata = false;
+                   x.SaveToken = true;
+                   x.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidateIssuer = jwtSettings.ValidateIssuer,
+                       ValidIssuers = new[] { jwtSettings.Issuer },
+                       ValidateIssuerSigningKey = jwtSettings.ValidateIssuerSigningKey,
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
+                       ValidAudience = jwtSettings.Audience,
+                       ValidateAudience = jwtSettings.ValidateAudience,
+                       ValidateLifetime = jwtSettings.ValidateLifeTime,
+                   };
+               });
+                return services;
+            }
         }
     }
 }

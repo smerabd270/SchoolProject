@@ -26,7 +26,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastrctureDependencies()
                  .AddServicesDependencies()
                  .AddCoreDependencies()
-                .AddServiceRegisteration();
+                .AddServiceRegisteration(builder.Configuration);
 #region localization
 builder.Services.AddControllersWithViews();
 builder.Services.AddLocalization(opt =>
@@ -62,7 +62,11 @@ app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllers();
 
