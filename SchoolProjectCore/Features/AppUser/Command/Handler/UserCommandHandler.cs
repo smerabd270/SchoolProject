@@ -48,16 +48,18 @@ namespace SchoolProjectCore.Features.AppUser.Command.Handler
 
             }
             var newUser = _mapper.Map<User>(request);
-            var createUser = await _applicationUserService.AddUserAsync(newUser, request.Password);
-            switch (createUser)
-            {
-                case "EmailIsExist": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
-                case "UserNameIsExist": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
-                case "ErrorInCreateUser": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
-                case "Failed": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
-                case "Success": return Success<string>("");
-                default: return BadRequest<string>(createUser);
-            }
+            //   var createUser = await _applicationUserService.AddUserAsync(newUser, request.Password);
+            var createUser = await _userManager.CreateAsync(newUser, request.Password);
+            //switch (createUser)
+            //{
+            //    case "EmailIsExist": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
+            //    case "UserNameIsExist": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
+            //    case "ErrorInCreateUser": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
+            //    case "Failed": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
+            //    case "Success": return Success<string>("");
+            //    default: return BadRequest<string>(createUser);
+            //}
+            return Success<string>("");
         }
         public async Task<Response<string>> Handle(EditUserCommand request, CancellationToken cancellationToken)
         {

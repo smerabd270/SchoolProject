@@ -18,6 +18,8 @@ namespace ShoolProjectService
             services.AddTransient<IDepartmentService, DepartmentService>();
             services.AddTransient<IEmailsService, EmailsService>();
             services.AddTransient<IApplicationUserService, ApplicationUserService>();
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
+
 
 
 
