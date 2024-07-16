@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProjectCore.Features.Students.Command.Models;
@@ -8,6 +9,7 @@ using SchoolProjectData.AppMetaData;
 namespace SchoolProjectApi.Controllers
 {
     [ApiController]
+    [Authorize]
     public class StudentController : ControllerBase
     {
         private readonly IMediator _mediator;

@@ -50,7 +50,7 @@ namespace SchoolProjectCore.Features.Authentication.Commands.Handler
             //try To Sign in 
             var signInResult = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
             //if Failed Return Passord is wrong
-         //   if (!signInResult.Succeeded) return BadRequest<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.PasswordNotCorrect]);
+         //  if (!signInResult.Succeeded) return BadRequest<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.PasswordNotCorrect]);
             //confirm email
             //if (!user.EmailConfirmed)
             //    return BadRequest<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.EmailNotConfirmed]);
