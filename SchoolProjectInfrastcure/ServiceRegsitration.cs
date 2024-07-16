@@ -73,8 +73,11 @@ namespace SchoolProjectInfrastrcure
                        ValidateAudience = jwtSettings.ValidateAudience,
                        ValidateLifetime = jwtSettings.ValidateLifeTime,
                    };
+
                });
-                return services;
+
+               
+                    return services;
             }
         }
     }
