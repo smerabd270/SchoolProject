@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using SchoolProject.Data.Helpers;
 using SchoolProject.Data.Results;
 using SchoolProjectData.Entities.Identity;
+using SchoolProjectInfrastrcure.Abstract;
 using SchoolProjectInfrastrcure.Data;
 using ShoolProjectService.Abstract;
 using System;
@@ -12,6 +13,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,34 +25,39 @@ namespace ShoolProjectService.Services
         private readonly UserManager<User> _userManager;
         private readonly IEmailsService _emailsService;
         private readonly ApplicationDBContext _applicationDBContext;
+        private readonly IRefreshTokenRepository _refreshTokenRepository;
+
         public AuthenticationService(JwtSettings jwtSettings,
                                     UserManager<User> userManager,
                                    IEmailsService emailsService,
-                                   ApplicationDBContext applicationDBContext)
+                                   ApplicationDBContext applicationDBContext,
+                                   IRefreshTokenRepository refreshTokenRepository = null)
         {
             _jwtSettings = jwtSettings;
             _userManager = userManager;
             _emailsService = emailsService;
             _applicationDBContext = applicationDBContext;
+            _refreshTokenRepository = refreshTokenRepository;
         }
         public async Task<JwtAuthResult> GetJWTToken(User user)
         {
             var (jwtToken, accessToken) = await GenerateJWTToken(user);
-            //var refreshToken = GetRefreshToken(user.UserName);
-            //var userRefreshToken = new UserRefreshToken
-            //{
-            //    AddedTime = DateTime.Now,
-            //    ExpiryDate = DateTime.Now.AddDays(_jwtSettings.RefreshTokenExpireDate),
-            //    IsUsed = true,
-            //    IsRevoked = false,
-            //    JwtId = jwtToken.Id,
-            //    RefreshToken = refreshToken.TokenString,
-            //    Token = accessToken,
-            //    UserId = user.Id
-            //};
+            var refreshToken = GetRefreshToken(user.UserName);
+            var userRefreshToken = new UserRefreshToken
+            {
+                AddedTime = DateTime.Now,
+                ExpiryDate = DateTime.Now.AddDays(_jwtSettings.RefreshTokenExpireDate),
+                IsUsed = true,
+                IsRevoked = false,
+                JwtId = jwtToken.Id,
+                RefreshToken = refreshToken.TokenString,
+                Token = accessToken,
+                UserId = user.Id
+            };
+            await _refreshTokenRepository.AddAsync(userRefreshToken);
 
             var response = new JwtAuthResult();
-           // response.refreshToken = refreshToken;
+            response.refreshToken = refreshToken;
             response.AccessToken = accessToken;
             return response;
         }
@@ -64,7 +71,25 @@ namespace ShoolProjectService.Services
                 expires: DateTime.Now.AddDays(_jwtSettings.AccessTokenExpireDate),
                 signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.Secret)), SecurityAlgorithms.HmacSha256Signature));
             var accessToken = new JwtSecurityTokenHandler().WriteToken(jwtToken);
+
             return (jwtToken, accessToken);
+        }
+        private RefreshToken GetRefreshToken(string username)
+        {
+            var refreshToken = new RefreshToken
+            {
+                ExpireAt = DateTime.Now.AddDays(_jwtSettings.RefreshTokenExpireDate),
+                UserName = username,
+                TokenString = GenerateRefreshToken()
+            };
+            return refreshToken;
+        }
+        private string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            var randomNumberGenerate = RandomNumberGenerator.Create();
+            randomNumberGenerate.GetBytes(randomNumber);
+            return Convert.ToBase64String(randomNumber);
         }
         public async Task<List<Claim>> GetClaims(User user)
         {

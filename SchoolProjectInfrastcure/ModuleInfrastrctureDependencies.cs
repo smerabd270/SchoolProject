@@ -20,7 +20,9 @@ namespace SchoolProjectInfrastrcure
             services.AddTransient<IDepartmentRepository, DepartmentRepository>();
             services.AddTransient<ISubjectRepository, SubjectRepository>();
             services.AddTransient<IInstructorRepository, InstructorRepository>();
-            
+            services.AddTransient<IRefreshTokenRepository, RefreshTokenRepository>();
+
+
 
             return services;
         }

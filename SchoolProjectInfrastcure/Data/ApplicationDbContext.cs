@@ -29,6 +29,8 @@ namespace SchoolProjectInfrastrcure.Data
         public DbSet<Student> students { get; set; }
         public DbSet<StudentSubject> studentSubjects { get; set; }
         public DbSet<Subject> subjects { get; set; }
+        public DbSet<UserRefreshToken> UserRefreshToken { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DepartmentSubject>().HasKey(x => new { x.SubID, x.DID });
