@@ -16,8 +16,16 @@ namespace SchoolProjectCore.Base
         {
             _stringLocalizer = stringLocalizer;
         }
+        public Response<T> Unauthorized<T>(string Message = null)
+        {
+            return new Response<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.Unauthorized,
+                Succeeded = true,
+                Message = Message == null ? _stringLocalizer[SharedResourcesKeys.UnAuthorized] : Message
+            };
+        }
 
-     
         public Response<T> Deleted<T>()
         {
             return new Response<T>()
